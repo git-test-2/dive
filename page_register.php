@@ -60,25 +60,18 @@
                             </div>
                             <div class="col-xl-6 ml-auto mr-auto">
                                 <div class="card p-4 rounded-plus bg-faded">
-
-                                    <?php
-
-
-
-                                    ?>
-
-                                    <?php if($_SESSION['danger']): ?>
-                                    <div class="alert alert-danger text-dark" role="alert">
-<!--                                        <strong>Уведомление!</strong> Этот эл. адрес уже занят другим пользователем.-->
-                                        <?=
+                                    <?php if ($_SESSION['danger']): ?>
+                                        <div class="alert alert-danger text-dark" role="alert">
+                                            <!--                                        <strong>Уведомление!</strong> Этот эл. адрес уже занят другим пользователем.-->
+                                            <?=
                                             $_SESSION['danger'];
                                             unset($_SESSION['danger']);
-                                        ?>
-                                    </div>
+                                            ?>
+                                        </div>
                                     <?php endif; ?>
 
 
-                                    <?php if($_SESSION['success']): ?>
+                                    <?php if ($_SESSION['success']): ?>
                                         <div class="alert alert-success text-dark" role="alert">
                                             <!--                                        <strong>Уведомление!</strong> Этот эл. адрес уже занят другим пользователем.-->
                                             <?=
