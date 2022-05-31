@@ -59,7 +59,7 @@ function display_flash_message($name)
 //Parameters: string - $path, Description: перенапраляет на другую страницу, Return value: null
 function redirect_to(string $path)
 {
-    header('Location: /' . $path);
+    header('Location:'.$path);
     die();
 }
 
@@ -73,10 +73,14 @@ if (!get_user_by_email($email)) {
     set_flash_message('danger', 'такая почта существует');
     display_flash_message('danger');
     redirect_to('page_register.php');
+
 }
+
 
 //чтоб код выглядел ровно, используй комбинацию клавиш ctrl+alt+L в шторме
 //вынеси подключение в отдельную функцию - и кстати, тебе не нужно при каждом шаге заново подключать к бд
+
+
 
 //мой код
 //$pdo = new PDO("mysql:host=localhost;dbname=dave_db", "root", "");
