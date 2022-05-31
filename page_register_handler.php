@@ -57,7 +57,7 @@ function display_flash_message($name) {
 
 //Parameters: string - $path, Description: перенапраляет на другую страницу, Return value: null
 function redirect_to(string $path) {
-        header("Location: /". $path);
+        header("Location:/". $path);
         die();
 }
 
