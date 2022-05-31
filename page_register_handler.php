@@ -52,12 +52,14 @@ function set_flash_message($name,$message) {
 
 //Parameters: string - name(ключ), Description: вывести флэш сообзение, Return value: null
 function display_flash_message($name) {
-    echo $_SESSION[$name];
+    if(isset($name)){ //проверять наличие переменных перед их выводом
+        echo $_SESSION[$name];
+    }
 }
 
 //Parameters: string - $path, Description: перенапраляет на другую страницу, Return value: null
 function redirect_to(string $path) {
-        header("Location:/". $path);
+        header("Location: /". $path);
         die();
 }
 
