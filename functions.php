@@ -53,4 +53,20 @@ function redirect_to(string $path)
     exit();
 }
 
+////////////////////2 - Авторизация
+//Parameters: string - $email, string - $password, Description: авторизировать пользователя, Return value: boolean
+function login($email, $password) {
+    $pdo = new PDO("mysql:host=localhost;dbname=dave_db", "root", "");
+    $sql = "SELECT * FROM users WHERE email=:email";
+    $statement = $pdo->prepare($sql);
+    $statement->execute(['email' => $email]);
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
 
+
+    if (!empty($user)) {
+        if (password_verify($user['password'], password_hash($password, PASSWORD_DEFAULT))) {
+            return true;
+        } else { return false;}
+    }
+
+}
