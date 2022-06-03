@@ -8,7 +8,6 @@ function get_user_by_email($email)
     $statement = $pdo->prepare($sql);
     $statement->execute(['email' => $email]);
     $user = $statement->fetch(PDO::FETCH_ASSOC);
-
     return $user;
 
 }
@@ -53,7 +52,7 @@ function redirect_to(string $path)
     exit();
 }
 
-////////////////////2 - Авторизация
+                                        ////////////////////2 - Авторизация
 //Parameters: string - $email, string - $password, Description: авторизировать пользователя, Return value: boolean
 function login($email, $password) {
     $pdo = new PDO("mysql:host=localhost;dbname=dave_db", "root", "");
@@ -63,10 +62,44 @@ function login($email, $password) {
     $user = $statement->fetch(PDO::FETCH_ASSOC);
 
 
+    //1 - ввёл юзер (123), 2 - хеш с бд ($2y$10$hhNE5ODyW1iwC5Ms7RG4kuKq0pzDIrf20WiDNSNIf9OUORNU0eeCm)
     if (!empty($user)) {
-        if (password_verify($user['password'], password_hash($password, PASSWORD_DEFAULT))) {
+        if (password_verify($password,$user['password'])) {
+            $_SESSION['login'] = true;
+
+
+            //добавили для 3 - Список пользователей, чтобы узнать админ ли человек, после того как он залогинился
+            //   var_dump($_SESSION['user_info']['role']);
+            $sql = "SELECT * FROM users WHERE email=:email";
+            $statement = $pdo->prepare($sql);
+            $statement->execute(['email' => $email]);
+            $_SESSION['user_info'] = $statement->fetch(PDO::FETCH_ASSOC);
+
+
             return true;
         } else { return false;}
     }
 
 }
+
+
+
+                                            // 3 - Список пользователей
+function is_logged_in() {
+    if($_SESSION['login']) {
+
+        echo 'Вы авторизованы';
+    }
+}
+
+
+function is_not_logged_in() {
+    if(!$_SESSION['login']) {
+        set_flash_message('danger','Пройдите авторизацию, чтобы посмотреть пользователей');
+        redirect_to("page_login.php");
+    }
+}
+
+
+
+
