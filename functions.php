@@ -100,6 +100,60 @@ function is_not_logged_in() {
     }
 }
 
+                                            // 4 - Добавить пользователя
+
+//Как только создали пользователя вызываем ф-ю редактировать его информацию.
+//Недостоющим ингридиентом для других ф-ций будет id пользователя (который мы получаем через return $pdo->lastInsertId() и где-то храним)
+//Parameters - string, Description: редактировать профиль, Return value: boolean
+function edit($user_id, $username, $job_title, $tel, $address) {
+    $pdo = new PDO("mysql:host=localhost;dbname=dave_db", "root", "");
+    $sql = "INSERT INTO general_information (id,username,job_title,tel,address) VALUES (:id,:username,:job_title,:tel,:address)";
+    $statement = $pdo->prepare($sql);
+    $statement->execute(['id'=>$user_id,'username'=> $username,'job_title'=>$job_title,'tel'=>$tel,'address'=>$address]);
+}
+
+
+function social($user_id,$vk,$telegram,$instagram) {
+    $pdo = new PDO("mysql:host=localhost;dbname=dave_db", "root", "");
+    $sql = "INSERT INTO social_networks (id, vk, telegram, instagram) VALUES (:id, :vk,:telegram, :instagram)";
+    $statement = $pdo->prepare($sql);
+    $statement->execute(['id'=>$user_id,'vk'=>$vk,'telegram'=>$telegram,'instagram'=>$instagram]);
+}
+
+
+
+function set_status($user_id, $status) {
+    $pdo = new PDO("mysql:host=localhost;dbname=dave_db", "root", "");
+    $sql = "UPDATE users SET status = :status WHERE id = :id"; //как сделать с INSERT не знаю
+    $statement = $pdo->prepare($sql);
+    $statement->execute(['id'=>$user_id,'status'=>$status]);
+}
+
+function upload_avatar($user_id,$image) {
+    if(!empty($_FILES['image']["tmp_name"]))
+    {
+        $tmp_name = $_FILES["image"]["tmp_name"]; //путь к файлу где временно храниться картинка
+        //$_FILES["image"] - где искать , ["name"] - имя конкретной картинки
+        $path_parts = pathinfo($_FILES["image"]["name"]); //получаем массив из информации про файл (имя, разширение и тд)
+        $suffix = $path_parts['extension']; //из массива получаем окончание файла - .jpg
+
+        $image_name = 'upload/'.uniqid().'.'.$suffix; //подготовили путь к картинке, чтобы записать в БД
+        //берём с временного хранилища, загружаем в папку images/ с уникальныи именем
+        move_uploaded_file($tmp_name,$image_name);
+
+        //var_dump($image_name); //string(24) "upload/628e600b04f3b.png"
+
+        $pdo = new PDO("mysql:host=localhost;dbname=dave_db","root","");
+        $sql = "UPDATE users  SET image = :image WHERE id = :id"; //как сделать с INSERT не знаю
+        $statement = $pdo->prepare($sql);
+        $statement->execute(['id'=>$user_id,'image'=>$image_name]);
+    }
+}
+
+
+
+
+
 
 
 
