@@ -1,3 +1,18 @@
+<?php session_start(); ?>
+<?php require_once ("functions.php");?>
+<?php
+    is_not_logged_in();
+    if($_SESSION['user_info']['role'] === 'admin' ) {echo 'да';} else { echo 'нет';}
+
+    var_dump($_SESSION);
+   //session_destroy();
+
+    $user_id = $_GET['id'];// получили id когда нажали на Редатировать пользователя
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,9 +51,11 @@
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-plus-circle'></i> Редактировать
             </h1>
-
         </div>
-        <form action="">
+        <!-- по id делаем выборку -->
+        <?php $user = get_user_by_id($user_id); ?>
+
+            <form action="edit_handler.php" method="post">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -48,30 +65,31 @@
                             </div>
                             <div class="panel-content">
                                 <!-- username -->
+                                <input type="hidden" name="user_id" value="<?= $user_id ?>">
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Имя</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="Иван иванов">
+                                    <input type="text" id="simpleinput" class="form-control" name="username" value="<?= $user['username']; ?>">
                                 </div>
 
                                 <!-- title -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Место работы</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="Marlin Веб-разработчик">
+                                    <input type="text" id="simpleinput" class="form-control" name="job_title" value="<?= $user['job_title']; ?>">
                                 </div>
 
                                 <!-- tel -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Номер телефона</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="8 888 8888 88">
+                                    <input type="text" id="simpleinput" class="form-control" name="tel" value="<?= $user['tel']; ?>">
                                 </div>
 
                                 <!-- address -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Адрес</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="Восточные Королевства, Штормград">
+                                    <input type="text" id="simpleinput" class="form-control" name="address" value="<?= $user['address']; ?>">
                                 </div>
                                 <div class="col-md-12 mt-3 d-flex flex-row-reverse">
-                                    <button class="btn btn-warning">Редактировать</button>
+                                    <button class="btn btn-warning" type="submit">Редактировать</button>
                                 </div>
                             </div>
                         </div>

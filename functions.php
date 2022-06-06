@@ -150,10 +150,34 @@ function upload_avatar($user_id,$image) {
     }
 }
 
+                                        // 5 - Редактировать пользователя
+//получить всю информацию с таблицы пользователя по id
+function get_user_by_id($id) {
+    $pdo = new PDO("mysql:host=localhost;dbname=dave_db", "root", "");
+    $sql = "SELECT * FROM general_information WHERE id = :id";
+    $statement = $pdo->prepare($sql);
+    $statement->execute(['id'=>$id]);
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $user;
+}
 
 
+//редактировать общую информацию
+// 4 параметра в функцию это нормально, больше это уже много
+function edit_info($user_id, $username, $job_title, $tel, $address) {
+    $pdo = new PDO("mysql:host=localhost;dbname=dave_db", "root", "");
+    $sql = "UPDATE general_information SET username = :username, job_title = :job_title, tel = :tel, address = :address WHERE id = :id";
+    $statement = $pdo->prepare($sql);
+    $statement->execute(['id'=>$user_id,'username'=>$username,'job_title'=>$job_title,'tel'=>$tel,'address'=>$address]);
+}
 
-
+//
+function is_author($logged_user_id, $edit_user_id) {
+    if ($logged_user_id === $edit_user_id) {
+        return true;
+    }
+}
 
 
 

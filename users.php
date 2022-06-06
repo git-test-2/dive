@@ -47,9 +47,10 @@
         </nav>
 
         <main id="js-page-content" role="main" class="page-content mt-3">
-            <div class="alert alert-success">
-                Профиль успешно обновлен.
-            </div>
+<!--            <div class="alert alert-success">-->
+<!--                Профиль успешно обновлен.-->
+<!--            </div>-->
+            <?php     display_flash_message('danger'); ?>
             <div class="subheader">
                 <h1 class="subheader-title">
                     <i class='subheader-icon fal fa-users'></i> Список пользователей
@@ -102,14 +103,16 @@
                                 <div class="info-card-text flex-1">
                                         <?= $user['name']; ?>
 
-                                        <!-- если пользователь админ - выводим шестерёнку -->
+                                        <!-- если пользователь админ - выводим шестерёнки, или только редатируем того кто зашёл -->
                                      <?php if($_SESSION['user_info']['role'] === 'admin' or ($user['id'] === $_SESSION['user_info']['id'] )): ?>
                                     <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info" data-toggle="dropdown" aria-expanded="false">
                                         <i class="fal fas fa-cog fa-fw d-inline-block ml-1 fs-md"></i>
                                         <i class="fal fa-angle-down d-inline-block ml-1 fs-md"></i>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="edit.html">
+
+                                        <!-- передали id пользователя методом GET -->
+                                        <a class="dropdown-item" href="edit.php?id=<?= $user['id']; ?>">
                                             <i class="fa fa-edit"></i>
                                             Редактировать</a>
                                         <a class="dropdown-item" href="security.html">
