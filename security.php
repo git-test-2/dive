@@ -1,3 +1,38 @@
+<?php
+session_start();
+require_once ("functions.php");
+
+is_not_logged_in();
+
+$user_id  = $_GET['id'];
+
+function get_user_by_id_for_redaction_email($user_id){
+    $pdo = new PDO("mysql:host=localhost;dbname=dave_db","root","");
+    $sql = "SELECT * FROM users WHERE id=:id";
+    $statement = $pdo->prepare($sql);
+    $statement->execute(['id'=>$user_id]);
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+    return $user;
+}
+
+set_flash_message('success','пользователь получен с id '.$user_id);
+
+$user = get_user_by_id_for_redaction_email($user_id);
+
+
+var_dump($user);
+
+if($_SESSION['user_info']['role'] === 'admin') {
+
+
+}
+
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,10 +70,11 @@
         <div class="subheader">
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-lock'></i> Безопасность
+                <?php display_flash_message('success'); ?>
             </h1>
 
         </div>
-        <form action="">
+        <form action="security_handler.php" method="post">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -49,14 +85,14 @@
                             <div class="panel-content">
                                 <!-- email -->
                                 <div class="form-group">
-                                    <label class="form-label" for="simpleinput">Email</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="john@example.com">
+                                    <label class="form-label" for="simpleinput">Email<?= $user['email']; ?></label>
+                                    <input type="text" id="simpleinput" class="form-control" value="<?= $user['email']; ?>" name="email">
                                 </div>
 
                                 <!-- password -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Пароль</label>
-                                    <input type="password" id="simpleinput" class="form-control">
+                                    <input type="password" id="simpleinput" class="form-control" name="password">
                                 </div>
 
                                 <!-- password confirmation-->
@@ -67,7 +103,7 @@
 
 
                                 <div class="col-md-12 mt-3 d-flex flex-row-reverse">
-                                    <button class="btn btn-warning">Изменить</button>
+                                    <button class="btn btn-warning" type="submit">Изменить</button>
                                 </div>
                             </div>
                         </div>

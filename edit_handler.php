@@ -15,6 +15,7 @@ require_once ("functions.php");
     $tel = $_POST['tel'];
     $address = $_POST['address'];
 
+
 /////////////
     $logged_user_id = $_SESSION['user_info']['id']; //кто в сессии залогинен, кто редактирует профиль
     $edit_user_id = $_POST['user_id']; //id пользователя чей профиль редактируют

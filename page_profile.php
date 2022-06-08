@@ -1,15 +1,17 @@
 <?php session_start(); ?>
 <?php require_once ("functions.php"); ?>
-
 <?php
+
+    is_not_logged_in();
+
 
     $user_id = $_GET['id'];
 
 
     $user = get_user_by_id($user_id);
     display_flash_message('success');
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
