@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 04 2022 г., 20:03
+-- Время создания: Июн 09 2022 г., 18:11
 -- Версия сервера: 5.6.43
 -- Версия PHP: 7.3.9
 
@@ -41,7 +41,8 @@ CREATE TABLE `general_information` (
 --
 
 INSERT INTO `general_information` (`id`, `username`, `job_title`, `tel`, `address`) VALUES
-(148, 'Вася', 'тут', '+2 12345', 'АААААА');
+(148, 'Вася9000', ' ГорСвет', '+2', 'Одесса'),
+(149, 'Петя_50001', 'Гугль', '909090', 'Киев-Житомир');
 
 -- --------------------------------------------------------
 
@@ -61,7 +62,8 @@ CREATE TABLE `social_networks` (
 --
 
 INSERT INTO `social_networks` (`id`, `vk`, `telegram`, `instagram`) VALUES
-(148, 'вк', 'тел ', 'инст');
+(148, 'вк', 'тел ', 'инст'),
+(149, '7878', '7878', '7878');
 
 -- --------------------------------------------------------
 
@@ -102,7 +104,8 @@ INSERT INTO `users` (`id`, `email`, `email_link`, `password`, `role`, `tags`, `i
 (58, 'sarah.mcbrook@smartadminwebapp.com', 'mailto:oliver.kopyov@smartadminwebapp.com', '', 'user', 'sarah mcbrook', 'img/demo/avatars/avatar-h.png', 'Sarah McBrook', 'Xray Division, Gotbootstrap Inc.', '+1 313-779-7613', '13 Jamie Rd, Detroit, MI, 48313, USA', 'success'),
 (59, 'jimmy.fallan@smartadminwebapp.com', 'mailto:oliver.kopyov@smartadminwebapp.com', '', 'user', 'jimmy fellan', 'img/demo/avatars/avatar-i.png', 'Jimmy Fellan', 'Accounting, Gotbootstrap Inc.', '+1 313-779-4314', '55 Smyth Rd, Detroit, MI, 48341, USA', 'success'),
 (60, 'arica.grace@smartadminwebapp.com', 'mailto:oliver.kopyov@smartadminwebapp.com', '', 'user', 'arica grace', 'img/demo/avatars/avatar-j.png', 'Arica Grace', 'Accounting, Gotbootstrap Inc.', '+1 313-779-3347', '798 Smyth Rd, Detroit, MI, 48341, USA', 'success'),
-(148, 'vas@site.ru', '', '$2y$10$8KKWcTUgZpHohmMSos4sPOV4H88NOMAy.gwzN.wdd8rnRJSJuEPj2', 'user', '', 'upload/629b8d4704ff4.jpg', '', '', '', '', 'danger');
+(148, 'vas11@site.ru', '', '$2y$10$8KKWcTUgZpHohmMSos4sPOV4H88NOMAy.gwzN.wdd8rnRJSJuEPj2', 'user', '', 'upload/629b8d4704ff4.jpg', '', '', '', '', 'danger'),
+(149, 'petya@site.ru', '', '$2y$10$ZJGBzGy1OKKTWQyTocZPFOgHTT1k55QfLWWVJYAToMlGW62LaupW.', 'user', '', 'upload/629c57347f3b3.jpg', '', '', '', '', 'danger');
 
 --
 -- Индексы сохранённых таблиц
@@ -134,7 +137,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
