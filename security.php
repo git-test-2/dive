@@ -6,6 +6,9 @@ is_not_logged_in();
 
 $user_id  = $_GET['id'];
 
+//session_destroy();
+
+//получаем почту пользователя по id и выводим в форму
 function get_user_by_id_for_redaction_email($user_id){
     $pdo = new PDO("mysql:host=localhost;dbname=dave_db","root","");
     $sql = "SELECT * FROM users WHERE id=:id";
@@ -18,21 +21,7 @@ function get_user_by_id_for_redaction_email($user_id){
 set_flash_message('success','пользователь получен с id '.$user_id);
 
 $user = get_user_by_id_for_redaction_email($user_id);
-
-
-var_dump($user);
-
-if($_SESSION['user_info']['role'] === 'admin') {
-
-
-}
-
-
-
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,6 +60,7 @@ if($_SESSION['user_info']['role'] === 'admin') {
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-lock'></i> Безопасность
                 <?php display_flash_message('success'); ?>
+                <?php display_flash_message('danger'); ?>
             </h1>
 
         </div>
@@ -101,7 +91,8 @@ if($_SESSION['user_info']['role'] === 'admin') {
                                     <input type="password" id="simpleinput" class="form-control">
                                 </div>
 
-
+                                <!-- передаём id пользователя что редактируем, чтобы вывести его данные, если почта уже есть -->
+                                <input type="hidden" name="user_id" value="<?= $user_id ?>" >
                                 <div class="col-md-12 mt-3 d-flex flex-row-reverse">
                                     <button class="btn btn-warning" type="submit">Изменить</button>
                                 </div>
