@@ -1,3 +1,18 @@
+<?php session_start(); ?>
+<?php require_once ("functions.php"); ?>
+<?php
+
+    is_not_logged_in();
+
+    $user_id = $_GET['id'];
+
+    $pdo = new PDO("mysql:host=localhost;dbname=dave_db","root","");
+    $sql = "SELECT * FROM users WHERE id = :id ";
+    $statement = $pdo->prepare($sql);
+    $statement->execute(['id'=>$user_id]);
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+    $user_status = $user['status'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +53,7 @@
             </h1>
 
         </div>
-        <form action="">
+        <form action="status_handler.php" method="post">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -50,17 +65,26 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <!-- status -->
+                                        <?php
+                                            $selects = [
+                                                    ['key' => 'success', 'title'=>'Онлайн'],
+                                                    ['key' => 'danger', 'title'=>'Отошел'],
+                                                    ['key' => 'warning', 'title'=>'Не беспокоить']
+                                            ];
+                                         ?>
                                         <div class="form-group">
+                                            <!-- передаём id юзера кого редактируем -->
+                                            <input type="hidden" name="user_id" value="<?= $user['id']; ?>">
                                             <label class="form-label" for="example-select">Выберите статус</label>
-                                            <select class="form-control" id="example-select">
-                                                <option>Онлайн</option>
-                                                <option>Отошел</option>
-                                                <option>Не беспокоить</option>
+                                            <select class="form-control" id="example-select" name="status">
+                                                <?php foreach ($selects as $select): ?>
+                                                <option value="<?= $select['key']?>" <?php if( $select['key'] == $user_status ) {echo 'selected';} ?> > <?= $select['title']; ?></option>
+                                                <?php endforeach; ?>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mt-3 d-flex flex-row-reverse">
-                                        <button class="btn btn-warning">Set Status</button>
+                                        <button class="btn btn-warning" type="submit">Set Status</button>
                                     </div>
                                 </div>
                             </div>
