@@ -180,4 +180,6 @@ function is_author($logged_user_id, $edit_user_id) {
 }
 
 
-
+function logout() {
+    session_destroy();
+}

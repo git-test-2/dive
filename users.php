@@ -51,6 +51,8 @@
 <!--                Профиль успешно обновлен.-->
 <!--            </div>-->
             <?php     display_flash_message('danger'); ?>
+            <?php     display_flash_message('success'); ?>
+
             <div class="subheader">
                 <h1 class="subheader-title">
                     <i class='subheader-icon fal fa-users'></i> Список пользователей
@@ -126,7 +128,7 @@
                                             <i class="fa fa-camera"></i>
                                             Загрузить аватар
                                         </a>
-                                        <a href="#" class="dropdown-item" onclick="return confirm('are you sure?');">
+                                        <a href="delete_user.php?id=<?= $user['id']; ?>" class="dropdown-item" onclick="return confirm('are you sure?');">
                                             <i class="fa fa-window-close"></i>
                                             Удалить
                                         </a>
