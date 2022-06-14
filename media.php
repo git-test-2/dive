@@ -1,3 +1,19 @@
+<?php
+session_start();
+require_once("functions.php");
+is_not_logged_in();
+
+$user_id = $_GET['id'];
+
+$pdo = new PDO("mysql:host=localhost;dbname=dave_db","root","");
+$sql = "SELECT * FROM users WHERE id=:id";
+$statement = $pdo->prepare($sql);
+$statement->execute(['id'=>$user_id]);
+$user = $statement->fetch(PDO::FETCH_ASSOC);
+
+var_dump($user);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +54,7 @@
             </h1>
 
         </div>
-        <form action="">
+        <form action="media_handler.php" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -48,17 +64,21 @@
                             </div>
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <img src="img/demo/authors/josh.png" alt="" class="img-responsive" width="200">
+                                    <!-- img/no_image.jpg - заглушка, если нету аватара -->
+                                    <img src="<?= $user['image'] ? $user['image'] : "img/no_image.jpg" ?>" alt="" class="img-responsive" width="200">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-label" for="example-fileinput">Выберите аватар</label>
-                                    <input type="file" id="example-fileinput" class="form-control-file">
+                                    <input type="file" id="example-fileinput" class="form-control-file" name="image">
+
+                                    <!-- передали id юзера, который меняет аватар -->
+                                    <input type="hidden" name="user_id_for_image" value="<?= $user_id ?>"  >
                                 </div>
 
 
                                 <div class="col-md-12 mt-3 d-flex flex-row-reverse">
-                                    <button class="btn btn-warning">Загрузить</button>
+                                    <button class="btn btn-warning" type="submit">Загрузить</button>
                                 </div>
                             </div>
                         </div>

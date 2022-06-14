@@ -83,7 +83,6 @@ function login($email, $password) {
 }
 
 
-
                                             // 3 - Список пользователей
 function is_logged_in() {
     if($_SESSION['login']) {
@@ -99,6 +98,7 @@ function is_not_logged_in() {
         redirect_to("page_login.php");
     }
 }
+
 
                                             // 4 - Добавить пользователя
 

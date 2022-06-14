@@ -1,16 +1,19 @@
 <?php session_start(); ?>
 <?php require_once ("functions.php"); ?>
 <?php
-
     is_not_logged_in();
 
-
     $user_id = $_GET['id'];
-
 
     $user = get_user_by_id($user_id);
     display_flash_message('success');
 
+//для вывода картинки для профиля
+$pdo = new PDO("mysql:host=localhost;dbname=dave_db", "root", "");
+$sql = "SELECT * FROM users WHERE id = :id";
+$statement = $pdo->prepare($sql);
+$statement->execute(['id'=>$user_id]);
+$user_image = $statement->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +63,7 @@
                         <div class="row no-gutters row-grid">
                             <div class="col-12">
                                 <div class="d-flex flex-column align-items-center justify-content-center p-4">
-                                    <img src="img/demo/avatars/avatar-admin-lg.png" class="rounded-circle shadow-2 img-thumbnail" alt="">
+                                    <img src="<?= $user_image['image']; ?>" class="rounded-circle shadow-2 img-thumbnail" alt="">
                                     <h5 class="mb-0 fw-700 text-center mt-3">
                                         <?= $user['username']; ?>
                                         <small class="text-muted mb-0"><?= $user['job_title']; ?></small>
