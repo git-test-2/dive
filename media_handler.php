@@ -13,6 +13,7 @@ if($_SESSION['user_info']['role'] == 'admin' or ($_SESSION['user_info']['id']) =
     redirect_to('page_login.php');
 }
 
+//function has_image($user_id,$image) {}; //булева возвращает есть ли аватар у пользователя или нет.
 
 upload_avatar($user_id,$image);
 set_flash_message('success','профиль успешно обновлен');
