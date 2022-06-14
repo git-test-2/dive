@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 09 2022 г., 18:11
+-- Время создания: Июн 14 2022 г., 21:49
 -- Версия сервера: 5.6.43
 -- Версия PHP: 7.3.9
 
@@ -93,7 +93,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `email`, `email_link`, `password`, `role`, `tags`, `image`, `name`, `work`, `tel`, `address`, `status`) VALUES
 (44, 'you@site.ru', '', '$2y$10$hhNE5ODyW1iwC5Ms7RG4kuKq0pzDIrf20WiDNSNIf9OUORNU0eeCm', 'admin', '', '', '', '', '', '', ''),
 (45, 'you222@site.ru', '', '$2y$10$ytKQpKdJGDmdMmMYfwyVg.SGc5BfOtzW7yE5iKMHyjFPv8oG6ZIra', '', '', '', '', '', '', '', ''),
-(46, 'you1@site.ru', '', '$2y$10$KTfHwXo/6d/vUuLYB45MnOAIBm9lW7LZJvlwdPOZNfduzhpm8DTnq', '', '', '', '', '', '', '', ''),
+(46, 'you1@site.ru', '', '$2y$10$KTfHwXo/6d/vUuLYB45MnOAIBm9lW7LZJvlwdPOZNfduzhpm8DTnq', '', '', '', '', '', '', '', 'danger'),
 (47, 'you333@site.ru', '', '$2y$10$9iXDsAec0p1S.RFwLQL74uJct4b1.PFUv11dZhZLUiEOcqP30qJVG', '', '', '', '', '', '', '', ''),
 (51, 'you777@site.ru', '', '$2y$10$PWddnvf2d3Gdap2vSEePwe8fmntSgZYoGb/QrsjJV7JVt4FpBTu2m', 'admin', '', '', '', '', '', '', ''),
 (52, 'oliver.kopyov@smartadminwebapp.com', 'oliver.kopyov@smartadminwebapp.com', '', 'user', 'oliver kopyov', 'img/demo/avatars/avatar-b.png', 'Oliver Kopyov', 'IT Director, Gotbootstrap Inc.', '317-456-2564', '15 Charist St, Detroit, MI, 48212, USA', 'success'),
@@ -104,8 +104,8 @@ INSERT INTO `users` (`id`, `email`, `email_link`, `password`, `role`, `tags`, `i
 (58, 'sarah.mcbrook@smartadminwebapp.com', 'mailto:oliver.kopyov@smartadminwebapp.com', '', 'user', 'sarah mcbrook', 'img/demo/avatars/avatar-h.png', 'Sarah McBrook', 'Xray Division, Gotbootstrap Inc.', '+1 313-779-7613', '13 Jamie Rd, Detroit, MI, 48313, USA', 'success'),
 (59, 'jimmy.fallan@smartadminwebapp.com', 'mailto:oliver.kopyov@smartadminwebapp.com', '', 'user', 'jimmy fellan', 'img/demo/avatars/avatar-i.png', 'Jimmy Fellan', 'Accounting, Gotbootstrap Inc.', '+1 313-779-4314', '55 Smyth Rd, Detroit, MI, 48341, USA', 'success'),
 (60, 'arica.grace@smartadminwebapp.com', 'mailto:oliver.kopyov@smartadminwebapp.com', '', 'user', 'arica grace', 'img/demo/avatars/avatar-j.png', 'Arica Grace', 'Accounting, Gotbootstrap Inc.', '+1 313-779-3347', '798 Smyth Rd, Detroit, MI, 48341, USA', 'success'),
-(148, 'vas11@site.ru', '', '$2y$10$8KKWcTUgZpHohmMSos4sPOV4H88NOMAy.gwzN.wdd8rnRJSJuEPj2', 'user', '', 'upload/629b8d4704ff4.jpg', '', '', '', '', 'danger'),
-(149, 'petya@site.ru', '', '$2y$10$ZJGBzGy1OKKTWQyTocZPFOgHTT1k55QfLWWVJYAToMlGW62LaupW.', 'user', '', 'upload/629c57347f3b3.jpg', '', '', '', '', 'danger');
+(148, 'vas11@site.ru', '', '$2y$10$8KKWcTUgZpHohmMSos4sPOV4H88NOMAy.gwzN.wdd8rnRJSJuEPj2', 'user', '', 'upload/629b8d4704ff4.jpg', '', '', '', '', 'warning'),
+(149, 'petya@site.ru', '', '$2y$10$Gyj5NlM.54/.w5.i3i7h/eBRcCzx4kzdhcujb2HYHjNUoEa54h/DC', 'user', '', 'upload/62a8c960e6506.jpeg', '', '', '', '', 'success');
 
 --
 -- Индексы сохранённых таблиц
@@ -137,7 +137,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
